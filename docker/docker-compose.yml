@@ -1,0 +1,41 @@
+version: '3.2'
+
+services:
+  php:
+    build: php
+    networks:
+      - backend
+    volumes:
+      - ../src:/var/www/html/
+
+  httpd:
+    build: httpd
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - ../src:/var/www/html/
+
+  mysql:
+    image: mysql:5.6.40
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: medtphp
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.9
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: "mariadb"
+      MYSQL_ROOT_PASSWORD: "medtphp"
+
+networks:
+  frontend:
+  backend:
