@@ -10,13 +10,16 @@ services:
       MYSQL_ROOT_PASSWORD: medtphp
 
   httpd:
-    build: .
+    build: ./docker_files/httpd/
     restart: always
     ports:
       - 80:80
       - 443:443
     volumes:
       - ./:/usr/local/apache2/htdocs/
+
+  php:
+    build: ./docker_files/php/
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.9
