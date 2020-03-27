@@ -2,6 +2,7 @@ version: '3.2'
 
 services:
   php:
+    container_name: wdt_php
     build: php
     networks:
       - backend
@@ -9,6 +10,7 @@ services:
       - ../src:/var/www/html/
 
   httpd:
+    container_name: wdt_httpd
     build: httpd
     depends_on:
       - php
@@ -22,6 +24,7 @@ services:
       - ../src:/var/www/html/
 
   mysql:
+    container_name: wdt_mysql
     image: mysql:5.6.40
     networks:
       - backend
@@ -29,6 +32,7 @@ services:
       MYSQL_ROOT_PASSWORD: medtphp
 
   phpmyadmin:
+    container_name: wdt_phpmyadmin
     image: phpmyadmin/phpmyadmin:4.9
     ports:
       - 8080:80
