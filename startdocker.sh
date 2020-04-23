@@ -1,6 +1,7 @@
-echo starting docker
 ./stopdocker.sh
+echo starting docker
 
-cd docker
+cd docker || exit
 docker-compose up --build -d
 cd ..
+
